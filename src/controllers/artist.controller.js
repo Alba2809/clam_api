@@ -21,6 +21,12 @@ export const getArtists = async (req, res) => {
 
 export const createArtist = async (req, res) => {
   try {
+    const { nombre } = req.body
+
+    const artistFound = await ArtistModel.getByName(nombre);
+
+    if (artistFound) return res.status(400).json(["Talento ya existe."]);
+
     const artistCreated = await ArtistModel.create(req.body);
 
     res.json(artistCreated);
@@ -41,10 +47,20 @@ export const updateArtist = async (req, res) => {
 
 export const deleteArtist = async (req, res) => {
   try {
-    const artistDeleted = await ArtistModel.delete(req.params.id)
+    const artistDeleted = await ArtistModel.delete(req.params.id);
 
-    res.json(artistDeleted)
+    res.json(artistDeleted);
   } catch (error) {
     res.status(500).json(["Hubo un error al eliminar el talento."]);
   }
-}
+};
+
+export const inactiveArtist = async (req, res) => {
+  try {
+    const artistInactivated = await ArtistModel.inactive(req.params.id);
+
+    res.json(artistInactivated);
+  } catch (error) {
+    res.status(500).json(["Hubo un error al cambiar a inactivo el talento."]);
+  }
+};

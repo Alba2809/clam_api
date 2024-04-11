@@ -2,15 +2,24 @@ import { pool } from "../db.js";
 
 export class ArtistModel {
   static async getAll() {
-    const [artists] = await pool.query("SELECT * FROM talentos");
+    const [artists] = await pool.query("SELECT * FROM talentos WHERE estado = 'Activo'");
 
     return artists;
   }
 
   static async getById(id) {
     const [artistFound] = await pool.query(
-      "SELECT * FROM talentos WHERE id = ?",
+      "SELECT * FROM talentos WHERE id = ? AND estado = 'Activo'",
       [id]
+    );
+
+    return artistFound[0];
+  }
+
+  static async getByName(name){
+    const [artistFound] = await pool.query(
+      "SELECT * FROM talentos WHERE LOWER(nombre) COLLATE utf8mb4_general_ci = LOWER(?)",
+      [name]
     );
 
     return artistFound[0];
@@ -57,6 +66,12 @@ export class ArtistModel {
 
   static async delete(id){
     const result = await pool.query("DELETE FROM talentos WHERE id = ?", [id])
+
+    return result[0]
+  }
+
+  static async inactive(id){
+    const result = await pool.query("UPDATE talentos SET estado = 'Inactivo' WHERE id = ?", [id])
 
     return result[0]
   }
