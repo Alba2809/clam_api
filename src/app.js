@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import artistRoutes from "./routes/artist.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
+import staffRoutes from "./routes/staff.routes.js";
 
 const app = express();
 app.use(
@@ -19,5 +20,6 @@ app.use(cookieParser());
 
 app.use("/api/artist", artistRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/staff", staffRoutes);
 
 export default app;

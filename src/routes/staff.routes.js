@@ -1,12 +1,12 @@
 import { Router } from "express";
 import {
   register,
-  getContacts
-} from "../controllers/contact.controller.js";
+  getStaff
+} from "../controllers/staff.controller.js";
 
 const router = Router();
 
 router.post("/", register);
-router.get("/:id", getContacts);
+router.get("/:id", getStaff);
 
 export default router;

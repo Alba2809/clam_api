@@ -20,7 +20,7 @@ export class ArtistModel {
 
   static async getByName(name) {
     const [artistFound] = await pool.query(
-      "SELECT * FROM talentos WHERE LOWER(nombre) COLLATE utf8mb4_general_ci = LOWER(?)",
+      "SELECT * FROM talentos WHERE LOWER(nombre) COLLATE utf8mb4_general_ci = LOWER(?) AND estado = 'Activo'",
       [name]
     );
 

@@ -10,6 +10,16 @@ export const getArtist = async (req, res) => {
   }
 };
 
+export const getArtistByName = async (req, res) => {
+  try {
+    const artistFound = await ArtistModel.getByName(req.params.name);
+    if (!artistFound) return res.status(400).json(["Talento no encontrado."]);
+    res.json(artistFound);
+  } catch (error) {
+    res.status(500).json(["Hubo un error al obtener el talento."]);
+  }
+};
+
 export const getArtists = async (req, res) => {
   try {
     const artists = await ArtistModel.getAll();
