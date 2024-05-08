@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import artistRoutes from "./routes/artist.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 
 const app = express();
 app.use(
@@ -17,5 +18,6 @@ app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 
 app.use("/api/artist", artistRoutes);
+app.use("/api/contact", contactRoutes);
 
 export default app;
