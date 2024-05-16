@@ -11,3 +11,5 @@ export const PORT_MYSQL = process.env.PORT_MYSQL || 3306;
 export const DATABASE_MYSQL = process.env.DATABASE_MYSQL || "clam";
 
 export const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+
+export const PORT = process.env.PORT || 3500
